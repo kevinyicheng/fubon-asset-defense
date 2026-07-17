@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>從產險史詩級風暴，看個人資產的極限防守</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;700;900&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ms-color-primary:      #005BAC;
+  --ms-color-primary-dark: #003C74;
+  --ms-color-accent:       #C0392B;
+  --ms-color-accent-light: #C9A063;
+  --ms-color-dark:         #12212F;
+  --ms-color-dark-content: #3A3A3A;
+  --ms-color-light:        #ECE7D8;
+  --ms-color-light-alt:    #F7F4EA;
+  --ms-color-text:         #2B2B2B;
+  --ms-color-text-light:   #8A8677;
+
+  --ms-font-heading:  'Noto Sans TC', sans-serif;
+  --ms-font-body-zh:  'Noto Sans TC', sans-serif;
+  --ms-font-body-en:  'Inter', sans-serif;
+  --ms-font-num:      'Noto Serif TC', serif;
+
+  --ms-fs-cover:    3.75em;
+  --ms-fs-heading:  2.75em;
+  --ms-fs-subtitle: 2.125em;
+  --ms-fs-body:     1.75em;
+  --ms-fs-aux:      1.5em;
+  --ms-fs-meta:     1.25em;
+
+  --ms-radius:    0.25em;
+  --ms-radius-lg: 0.75em;
+  --ms-shadow:    0 0.06em 0.19em rgba(0,0,0,0.08);
+}
+
+/* ── Reset ── */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; overflow: hidden; background: var(--ms-color-dark, #111); }
+.deck { position: relative; width: 100%; height: 100vh; }
+
+/* ── Global Typography ── */
+.slide h1 { font-family: var(--ms-font-heading); font-weight: 900; font-size: var(--ms-fs-cover); line-height: 1.3; }
+.slide h2 { font-family: var(--ms-font-heading); font-weight: 700; font-size: var(--ms-fs-heading); line-height: 1.3; }
+.slide h3 { font-family: var(--ms-font-heading); font-weight: 700; font-size: var(--ms-fs-subtitle); line-height: 1.3; }
+.slide p, .slide li { font-family: var(--ms-font-body-zh); font-size: var(--ms-fs-body); font-weight: 500; }
+.slide td, .slide th, .slide label { font-family: var(--ms-font-body-zh); }
+.slide strong { color: var(--ms-color-primary); }
+.slide a { color: var(--ms-color-accent); text-decoration: underline; }
+.en { font-family: var(--ms-font-body-en); }
+.num { font-family: var(--ms-font-num); font-weight: 900; font-variant-numeric: tabular-nums; }
+
+/* ── 動畫 ── */
+@keyframes smoke-in {
+  0% { opacity: 0; filter: blur(12px); transform: translateY(8px); }
+  100% { opacity: 1; filter: blur(0); transform: translateY(0); }
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-line { opacity: 0; animation: fadeInUp 0.45s ease-out forwards; animation-delay: calc(var(--i, 0) * 0.12s); }
+.slide-cover .animate-line { animation: smoke-in 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; animation-delay: calc(var(--i, 0) * 0.25s); }
+
+/* ── Base Slide ── */
+.slide {
+  position: relative; width: 100%;
+  font-family: var(--ms-font-body-zh); color: var(--ms-color-text);
+  font-size: clamp(10px, 1.667vw, 22px);
+  --_pad-x: max(5em, calc((100vw - 1600px) / 2 + 5em));
+  padding: 3.75em var(--_pad-x);
+  display: flex; flex-direction: column; justify-content: center;
+  overflow: hidden; background: var(--ms-color-light);
+}
+.slide h1, .slide h2, .slide h3 { margin: 0 0 0.5em; }
+.slide p { margin: 0 0 0.75em; }
+.slide ul, .slide ol { padding-left: 1.4em; margin: 0 0 0.75em; }
+.slide li { margin-bottom: 0.3em; }
+.slide em { font-style: normal; color: var(--ms-color-accent); }
+.slide table { border-collapse: collapse; width: 100%; margin: 0 0 0.75em; }
+.slide th, .slide td { border: 1px solid rgba(0,0,0,0.12); padding: 0.5em 0.8em; text-align: left; }
+.slide th { background: rgba(0,0,0,0.05); }
+.slide img { max-width: 100%; height: auto; display: block; border-radius: 1em; }
+
+.slide-end { justify-content: center; align-items: center; text-align: center; background: var(--ms-color-dark); color: var(--ms-color-light-alt); }
+
+/* ── bg-grid utility ── */
+.slide.bg-grid, .chapter-1, .content-1, .compare-3 {
+  background-color: var(--ms-color-light-alt);
+  background-image: linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px);
+  background-size: 0.75em 0.75em;
+}
+
+/* ── Cover-2 ── */
+.cover-2 { background: var(--ms-color-dark); color: var(--ms-color-light-alt); align-items: flex-start; }
+.cover-2 .cover-2-gradient { position: absolute; top: 0; right: 0; width: 35%; height: 100%; background: linear-gradient(135deg, var(--ms-color-primary), var(--ms-color-accent)); opacity: 0.85; }
+.cover-2 .cover-content { position: relative; z-index: 1; max-width: 62%; }
+
+/* ── Chapter-1 ── */
+.chapter-1 { color: var(--ms-color-text); }
+.chapter-1 .chapter-badge { display: inline-flex; align-items: center; gap: 0.5em; margin-bottom: 0.75em; }
+.chapter-1 .chapter-num { width: 1.75em; height: 1.75em; border-radius: 50%; background: var(--ms-color-accent); display: flex; align-items: center; justify-content: center; color: var(--ms-color-light-alt); font-family: 'Inter', sans-serif; font-weight: 700; font-size: var(--ms-fs-aux); }
+.chapter-1 h2 { color: var(--ms-color-primary); }
+
+/* ── Data-1 ── */
+.data-1 { text-align: center; align-items: center; }
+.data-1 .data-stats-center { display: flex; justify-content: center; gap: 3em; flex-wrap: wrap; margin-bottom: 1.5em; }
+.data-1 .data-value { color: var(--ms-color-primary); font-family: var(--ms-font-num); font-weight: 900; font-size: 4.5em; line-height: 1.1; }
+.data-1 .data-value.danger { color: var(--ms-color-accent); }
+.data-1 .data-label { color: var(--ms-color-text-light); margin-top: 0.3em; font-size: var(--ms-fs-aux); }
+
+/* ── Data-3 table ── */
+.data-3 .data-table { width: 100%; border-collapse: collapse; margin-bottom: 1em; }
+.data-3 .data-table th { background: var(--ms-color-dark); color: var(--ms-color-light-alt); padding: 0.6em 1.2em; text-align: left; border: none; font-size: var(--ms-fs-aux); }
+.data-3 .data-table td { padding: 0.55em 1.2em; border: none; border-bottom: 1px solid rgba(0,0,0,0.08); font-size: var(--ms-fs-aux); }
+.data-3 .data-row-highlight td { background: color-mix(in srgb, var(--ms-color-primary) 8%, transparent); font-weight: 700; }
+.data-3 .data-row-highlight .num { color: var(--ms-color-accent); }
+.bar-cell { display: flex; align-items: center; gap: 0.6em; }
+.bar { height: 0.7em; border-radius: 0.35em; background: linear-gradient(90deg, var(--ms-color-primary), var(--ms-color-accent)); }
+
+/* ── Compare-1 ── */
+.compare-1 .compare-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5em; }
+.compare-card { background: #fff; border-radius: var(--ms-radius-lg); padding: 1.4em 1.5em; box-shadow: var(--ms-shadow); border-top: 6px solid var(--ms-color-primary); }
+.compare-card h3 { margin-bottom: 0.4em; }
+.compare-card .tag { display: inline-block; font-size: var(--ms-fs-meta); color: #fff; background: var(--ms-color-accent); border-radius: 2em; padding: 0.15em 0.9em; margin-bottom: 0.7em; font-weight: 700; }
+.compare-card p { font-size: var(--ms-fs-aux); margin-bottom: 0.4em; }
+
+/* ── Compare-3 ── */
+.compare-3 .compare-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2em; position: relative; }
+.compare-3 .compare-divider { position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: rgba(0,0,0,0.08); }
+.compare-3 .compare-col-title { margin-bottom: 0.6em; }
+.compare-3 .compare-pill { background: #fff; border-radius: var(--ms-radius-lg); padding: 0.6em 0.9em; box-shadow: var(--ms-shadow); margin-bottom: 0.5em; font-size: var(--ms-fs-aux); }
+
+/* ── Quote-1 ── */
+.quote-1 { background: var(--ms-color-primary); color: var(--ms-color-light-alt); align-items: flex-start; position: relative; }
+.quote-1 .quote-deco { position: absolute; top: 1.2em; left: 1.2em; font-size: 8em; line-height: 0.8; color: rgba(255,255,255,0.1); font-family: Georgia, serif; pointer-events: none; }
+.quote-1 .quote-eyebrow { font-size: var(--ms-fs-meta); color: rgba(255,255,255,0.6); margin-bottom: 0.5em; }
+.quote-1 h2 { color: var(--ms-color-light-alt); font-weight: 700; }
+.quote-1 .quote-divider { width: 2em; height: 3px; background: var(--ms-color-accent-light); margin: 1em 0; }
+.quote-1 .quote-subtitle { font-size: var(--ms-fs-aux); color: rgba(255,255,255,0.75); }
+.quote-1 strong, .quote-1 em { color: var(--ms-color-accent-light); }
+
+/* ── Quote-3 ── */
+.quote-3 { background: var(--ms-color-dark); color: var(--ms-color-light-alt); position: relative; justify-content: center; }
+.quote-3 .q3-bar { position: absolute; left: 0; top: 20%; height: 60%; width: 5px; background: linear-gradient(180deg, var(--ms-color-primary), var(--ms-color-accent)); border-radius: 0 3px 3px 0; }
+.quote-3 .q3-deco { position: absolute; top: 0.8em; right: 1.2em; font-size: 8em; color: rgba(255,255,255,0.05); font-family: Georgia, serif; line-height: 1; pointer-events: none; }
+.quote-3 .quote-text { color: var(--ms-color-light-alt); max-width: 92%; font-family: var(--ms-font-heading); font-weight: 700; font-size: var(--ms-fs-heading); line-height: 1.45; }
+.quote-3 .q3-sub { font-size: var(--ms-fs-meta); color: rgba(255,255,255,0.4); margin-top: 1em; }
+.quote-3 em { color: var(--ms-color-accent-light); }
+
+/* ── Content-3 ── */
+.content-3 .content-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1em; }
+.content-3 .grid-card { background: #fff; border-radius: var(--ms-radius-lg); padding: 1.3em 1.2em; box-shadow: var(--ms-shadow); border-top: 6px solid var(--ms-color-primary); }
+.content-3 .grid-card:nth-child(2) { border-top-color: var(--ms-color-accent-light); }
+.content-3 .grid-card:nth-child(3) { border-top-color: var(--ms-color-accent); }
+.content-3 .grid-card h3 { font-size: 1.7em; margin-bottom: 0.5em; }
+.content-3 .grid-card p { font-size: var(--ms-fs-aux); margin: 0; }
+.content-3 .grid-card .card-num { font-family: var(--ms-font-num); font-weight: 900; color: var(--ms-color-text-light); font-size: 1.4em; display: block; margin-bottom: 0.3em; }
+
+/* ── Flow (Slide 邏輯轉換) ── */
+.flow-row { display: flex; align-items: center; gap: 1em; background: #fff; border-radius: var(--ms-radius-lg); padding: 0.8em 1.2em; box-shadow: var(--ms-shadow); margin-bottom: 0.7em; }
+.flow-row .flow-who { font-weight: 700; font-size: var(--ms-fs-aux); min-width: 9em; }
+.flow-row .flow-arrow { color: var(--ms-color-text-light); font-size: var(--ms-fs-aux); }
+.flow-row .flow-what { font-size: var(--ms-fs-aux); }
+.flow-row.highlight { border: 2px solid var(--ms-color-accent); background: color-mix(in srgb, var(--ms-color-accent) 6%, #fff); }
+.flow-row.highlight .flow-what strong { color: var(--ms-color-accent); }
+
+/* ── Controls ── */
+.controls {
+  position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 8px; align-items: center; z-index: 100;
+  background: rgba(0,0,0,0.7); padding: 8px 16px; border-radius: 24px;
+}
+.controls button { background: none; border: none; color: #fff; cursor: pointer; padding: 4px 8px; display: flex; align-items: center; }
+.controls button svg { width: 20px; height: 20px; }
+.controls button:hover { opacity: 0.7; }
+#counter { color: #fff; font-family: var(--ms-font-body-en, 'Inter', sans-serif); font-size: 13px; font-weight: 600; min-width: 60px; text-align: center; }
+
+/* ── Lightbox ── */
+.slide img { cursor: zoom-in; }
+.lightbox { position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,0.88); display: flex; align-items: center; justify-content: center; cursor: zoom-out; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+.lightbox.active { opacity: 1; pointer-events: auto; }
+.lightbox img { max-width: 92vw; max-height: 92vh; object-fit: contain; border-radius: var(--ms-radius-lg); box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
+.lightbox-close { position: absolute; top: 20px; right: 28px; color: #fff; font-size: 28px; cursor: pointer; opacity: 0.6; transition: opacity 0.2s; background: none; border: none; z-index: 201; }
+.lightbox-close:hover { opacity: 1; }
+
+/* ── Scroll 模式 ── */
+html.scroll-mode, html.scroll-mode body { overflow: auto !important; height: auto !important; background: var(--ms-color-light) !important; }
+html.scroll-mode .deck { height: auto !important; }
+body.scroll-mode .slide { position: relative; aspect-ratio: 16 / 9; margin: 40px auto; max-width: 1280px; box-shadow: 0 2px 20px rgba(0,0,0,0.15); font-size: 16px; border-radius: 24px; }
+body.scroll-mode .controls { display: none; }
+
+/* ── 光桌 Grid ── */
+html.grid-mode, html.grid-mode body { overflow: auto !important; height: auto !important; background: #1a1a1a !important; }
+html.grid-mode .controls { opacity: 0; pointer-events: none; }
+html.grid-mode .deck {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px 28px;
+  padding: 36px 40px;
+  height: auto !important;
+  width: 100% !important;
+  position: relative !important;
+}
+html.grid-mode .slide {
+  position: relative !important;
+  inset: auto !important;
+  display: flex !important;
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 16 / 9;
+  cursor: pointer;
+  border-radius: 6px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.5);
+  overflow: hidden !important;
+  transition: outline 0.15s, transform 0.15s;
+  font-size: clamp(4px, 0.55vw, 8px);
+}
+html.grid-mode .slide:hover { outline: 2px solid var(--ms-color-primary); transform: scale(1.03); z-index: 1; }
+html.grid-mode .slide.grid-current { outline: 3px solid #C0392B; }
+html.grid-mode .slide .animate-line { opacity: 1 !important; animation: none !important; }
+html.grid-mode .slide::after {
+  content: attr(data-slide-num);
+  position: absolute; bottom: 6px; right: 8px;
+  color: rgba(255,255,255,0.7); font-size: 13px;
+  font-family: var(--ms-font-body-en, sans-serif); font-weight: 700;
+  background: rgba(0,0,0,0.55); padding: 2px 8px; border-radius: 6px;
+  z-index: 10; line-height: 1.4; white-space: nowrap;
+}
+html.grid-mode .slide.grid-current::after { color: #fff; background: #C0392B; }
+@media (max-width: 768px) {
+  html.grid-mode .deck { grid-template-columns: repeat(2, 1fr); gap: 36px 12px; padding: 20px 12px; }
+}
+
+/* ── 列印 ── */
+@page { margin: 0; size: landscape; }
+@media print {
+  body > :not(.deck) { display: none !important; }
+  html, body { height: auto; overflow: visible !important; background: #fff !important; margin: 0 !important; padding: 0 !important; }
+  .deck { height: auto; overflow: visible !important; margin: 0 !important; padding: 0 !important; }
+  .slide { break-after: page; break-inside: avoid; display: flex !important; position: relative !important; margin: 0 !important; width: 100vw !important; height: 100vh !important; box-shadow: none !important; overflow: hidden !important; print-color-adjust: exact !important; }
+  .slide:last-child { break-after: auto !important; }
+  .animate-line { opacity: 1 !important; animation: none !important; filter: none !important; transform: none !important; }
+  .slide, .slide * { print-color-adjust: exact !important; }
+}
+
+/* ── 手機 Scroll RWD ── */
+@media (max-width: 768px) {
+  body.scroll-mode .slide h1 { font-size: 28px !important; }
+  body.scroll-mode .slide h2 { font-size: 22px !important; }
+  body.scroll-mode .slide h3 { font-size: 20px !important; }
+  body.scroll-mode .slide p, body.scroll-mode .slide li { font-size: 16px !important; }
+  body.scroll-mode .content-3 .content-grid { grid-template-columns: 1fr !important; }
+  body.scroll-mode .compare-3 .compare-cols { grid-template-columns: 1fr !important; }
+  body.scroll-mode .compare-1 .compare-columns { grid-template-columns: 1fr !important; }
+  body.scroll-mode .data-1 .data-stats-center { gap: 1.5em; }
+  body.scroll-mode .flow-row { flex-wrap: wrap; }
+}
+</style>
+</head>
+<body>
+<div class="deck">
+
+  <!-- 1 封面 -->
+  <div class="slide cover-2 slide-cover">
+    <div class="cover-2-gradient"></div>
+    <div class="cover-content">
+      <p class="animate-line" style="--i:0; color: var(--ms-color-accent-light); font-size: var(--ms-fs-meta); letter-spacing: 0.2em;">富邦人壽 TC813 鐘明通訊處 ｜ 業務團隊分享</p>
+      <h1 class="animate-line" style="--i:1">從產險史詩級風暴，<br>看個人資產的<em style="color: var(--ms-color-accent-light);">極限防守</em></h1>
+      <p class="animate-line" style="--i:2; color: rgba(255,255,255,0.7); font-size: var(--ms-fs-aux); margin-top: 1em;">為什麼你需要「類定存資產」？</p>
+    </div>
+  </div>
+
+  <!-- 2 開場引言 -->
+  <div class="slide quote-3">
+    <div class="q3-bar"></div>
+    <div class="q3-deco">&ldquo;</div>
+    <p class="quote-text animate-line" style="--i:0">當超級風險突然降臨，第一時間考驗的<br>從來不是你有多會賺錢，<br>而是你手上有多少<em>「現金」</em>能應付突如其來的黑洞。</p>
+    <p class="q3-sub animate-line" style="--i:1">—— 2022 年，整個台灣產險業用 2,700 億學到的一課</p>
+  </div>
+
+  <!-- 3 章節：事件回顧 -->
+  <div class="slide chapter-1">
+    <div class="chapter-badge animate-line" style="--i:0">
+      <div class="chapter-num">1</div>
+      <p style="margin:0; color: var(--ms-color-text-light); font-size: var(--ms-fs-aux);">事件回顧</p>
+    </div>
+    <h2 class="animate-line" style="--i:1">2022 年，台灣保險業的黑天鵝</h2>
+    <p class="animate-line" style="--i:2" style="font-size: var(--ms-fs-aux);">疫情爆發 × 防疫險 —— 台灣產險史上最大理賠海嘯</p>
+  </div>
+
+  <!-- 4 震撼數據 -->
+  <div class="slide data-1 bg-grid">
+    <h2 class="animate-line" style="--i:0">一場風暴，吞掉二十年</h2>
+    <div class="data-stats-center">
+      <div class="animate-line" style="--i:1">
+        <div class="data-value danger num">2,700<span style="font-size:0.4em;">億+</span></div>
+        <div class="data-label">整體產險業防疫險理賠總額</div>
+      </div>
+      <div class="animate-line" style="--i:2">
+        <div class="data-value num">20<span style="font-size:0.4em;">年</span></div>
+        <div class="data-label">過去累積的獲利，一年內全數吐出</div>
+      </div>
+    </div>
+    <p class="animate-line" style="--i:3" style="color: var(--ms-color-text-light);">理賠金每天以「億」為單位流出 —— 這時候，誰手上有現金？</p>
+  </div>
+
+  <!-- 5 求生時刻：賣樓 -->
+  <div class="slide compare-1 bg-grid">
+    <h2 class="animate-line" style="--i:0">【求生時刻】為了現金，企業被逼得賣樓求生</h2>
+    <div class="compare-columns">
+      <div class="compare-card animate-line" style="--i:1">
+        <span class="tag">賣樓 + 增資</span>
+        <h3>和泰產險</h3>
+        <p>變賣台北車站前自有大樓，變現 <strong class="num">13.27 億</strong></p>
+        <p>母集團增資 <strong class="num">260 億元</strong> 救火</p>
+      </div>
+      <div class="compare-card animate-line" style="--i:2">
+        <span class="tag">連總部都賣</span>
+        <h3>明台產險</h3>
+        <p>變賣仁愛路總部大樓 + 3 處分公司大樓</p>
+        <p>光總部就賣了 <strong class="num">37.67 億元</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6 反思引言 -->
+  <div class="slide quote-1">
+    <div class="quote-deco">&ldquo;</div>
+    <p class="quote-eyebrow animate-line" style="--i:0">講者反思</p>
+    <h2 class="animate-line" style="--i:1">企業面臨巨災，可以賣掉總部大樓換現金。<br>但我們的客戶，當家庭遇到巨變時，<br><em>有大樓可以隨便賣嗎？</em></h2>
+    <div class="quote-divider animate-line" style="--i:2"></div>
+    <p class="quote-subtitle animate-line" style="--i:3">就算有房產 —— 急售，能賣到好價錢嗎？</p>
+  </div>
+
+  <!-- 7 品牌底氣：理賠數據表 -->
+  <div class="slide data-3 bg-grid">
+    <h2 class="animate-line" style="--i:0">【品牌底氣】防疫險六大重災區理賠金額</h2>
+    <table class="data-table animate-line" style="--i:1">
+      <tr><th>公司</th><th>理賠金額（約）</th><th style="width:38%;">規模</th></tr>
+      <tr class="data-row-highlight"><td>富邦產險</td><td class="num">900 億元</td><td><div class="bar-cell"><div class="bar" style="width:100%;"></div></div></td></tr>
+      <tr><td>新安東京</td><td class="num">500 億元</td><td><div class="bar-cell"><div class="bar" style="width:56%; opacity:0.55;"></div></div></td></tr>
+      <tr><td>國泰產險</td><td class="num">230 億元</td><td><div class="bar-cell"><div class="bar" style="width:26%; opacity:0.55;"></div></div></td></tr>
+      <tr><td>和泰產險</td><td class="num">200 億元</td><td><div class="bar-cell"><div class="bar" style="width:22%; opacity:0.55;"></div></div></td></tr>
+    </table>
+    <p class="animate-line" style="--i:2" style="font-size: var(--ms-fs-aux); color: var(--ms-color-text-light);">富邦承受了全業界最龐大的理賠壓力 —— 然後呢？</p>
+  </div>
+
+  <!-- 8 富邦沒有賣大樓 -->
+  <div class="slide data-1 bg-grid">
+    <h2 class="animate-line" style="--i:0">為什麼富邦<em>沒有賣大樓</em>？</h2>
+    <div class="data-stats-center">
+      <div class="animate-line" style="--i:1">
+        <div class="data-value danger num">900<span style="font-size:0.4em;">億</span></div>
+        <div class="data-label">業界最大理賠壓力</div>
+      </div>
+      <div class="animate-line" style="--i:2">
+        <div class="data-value num" style="font-size:4.5em;">0<span style="font-size:0.4em;">棟</span></div>
+        <div class="data-label">變賣的大樓</div>
+      </div>
+      <div class="animate-line" style="--i:3">
+        <div class="data-value num">310<span style="font-size:0.4em;">億</span></div>
+        <div class="data-label">富邦金控兩次現金增資挹注</div>
+      </div>
+    </div>
+    <p class="animate-line" style="--i:4"><strong>這就是客戶選擇富邦的價值</strong> —— 風暴來臨，不閃躲、不賣樓，集團有足夠的現金儲備承擔責任。</p>
+  </div>
+
+  <!-- 9 浴火重生 2025 -->
+  <div class="slide data-3 bg-grid">
+    <h2 class="animate-line" style="--i:0">【浴火重生】2025 最新產險版圖，大者恆大</h2>
+    <table class="data-table animate-line" style="--i:1">
+      <tr><th>排名</th><th>公司</th><th>總資產（約）</th><th>備註</th></tr>
+      <tr class="data-row-highlight"><td class="num">1</td><td>富邦產險</td><td class="num">突破 1,000 億元</td><td>全台唯一破千億，2025 年獲利近 75 億穩居獲利王</td></tr>
+      <tr><td class="num">2</td><td>國泰產險</td><td class="num">600 – 700 億元</td><td>—</td></tr>
+      <tr><td class="num">3</td><td>新光產險</td><td class="num">624 億元</td><td>—</td></tr>
+    </table>
+    <p class="animate-line" style="--i:2" style="font-size: var(--ms-fs-aux);">風暴過後，強者更強。撐過危機的關鍵，在於<strong>「底部的現金資產」夠不夠厚</strong>。</p>
+  </div>
+
+  <!-- 10 章節：客戶連結 -->
+  <div class="slide chapter-1">
+    <div class="chapter-badge animate-line" style="--i:0">
+      <div class="chapter-num">2</div>
+      <p style="margin:0; color: var(--ms-color-text-light); font-size: var(--ms-fs-aux);">客戶連結</p>
+    </div>
+    <h2 class="animate-line" style="--i:1">財富的極限防守，<br>你的「母集團」在哪裡？</h2>
+  </div>
+
+  <!-- 11 邏輯轉換 -->
+  <div class="slide bg-grid">
+    <h2 class="animate-line" style="--i:0">同一場考題，三種答案</h2>
+    <div class="flow-row animate-line" style="--i:1">
+      <span class="flow-who">產險公司遇到危機</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-what">靠<strong>賣大樓</strong>換現金</span>
+    </div>
+    <div class="flow-row animate-line" style="--i:2">
+      <span class="flow-who">富邦遇到危機</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-what">靠母集團金控爸爸的 <strong class="num">310 億</strong>現金支援</span>
+    </div>
+    <div class="flow-row highlight animate-line" style="--i:3">
+      <span class="flow-who">一般家庭遇到危機</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-what">只能靠自己平時建立的<strong>「防守部位」</strong></span>
+    </div>
+    <p class="animate-line" style="--i:4" style="font-size: var(--ms-fs-aux); color: var(--ms-color-text-light); margin-top: 0.8em;">沒有金控爸爸的我們，防守部位必須自己蓋。</p>
+  </div>
+
+  <!-- 12 核心觀念 -->
+  <div class="slide quote-1">
+    <div class="quote-deco">&ldquo;</div>
+    <p class="quote-eyebrow animate-line" style="--i:0">核心觀念</p>
+    <h2 class="animate-line" style="--i:1">風險來臨時，<br><em>高流動性與保本資產</em>才是救命丹。</h2>
+    <div class="quote-divider animate-line" style="--i:2"></div>
+    <p class="quote-subtitle animate-line" style="--i:3">股災或急需用錢時，就算是台積電，往往也得「認賠殺出」。<br>真正能像富邦金控一樣，穩穩給出 100% 現金支援的，<br>是你手中的「儲蓄險與類定存資產」。</p>
+  </div>
+
+  <!-- 13 行動呼籲三卡 -->
+  <div class="slide content-3 bg-grid">
+    <h2 class="animate-line" style="--i:0">用儲蓄險，建構專屬的「金控防護網」</h2>
+    <div class="content-grid">
+      <div class="grid-card animate-line" style="--i:1">
+        <span class="card-num">01</span>
+        <h3>確定性</h3>
+        <p>在充滿變數的環境中，儲蓄險提供<strong>白紙黑字的確定價值</strong>。</p>
+      </div>
+      <div class="grid-card animate-line" style="--i:2">
+        <span class="card-num">02</span>
+        <h3>高流動性</h3>
+        <p>急需現金（生病、意外、無薪假）時，可保單借款或解約應急 —— 不用像賣房等半年，也不用承擔股市腰斬風險。</p>
+      </div>
+      <div class="grid-card animate-line" style="--i:3">
+        <span class="card-num">03</span>
+        <h3>強大後盾</h3>
+        <p>把富邦當作家庭的專屬財務後盾，用富邦的保單，建立自己的<strong>「百億金鐘罩」</strong>。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 14 結尾 -->
+  <div class="slide slide-end">
+    <h2 class="animate-line" style="--i:0" style="max-width: 85%;">資產配置不能只有攻擊，必須要有防守。</h2>
+    <p class="animate-line" style="--i:1" style="color: rgba(255,255,255,0.7); font-size: var(--ms-fs-aux); max-width: 80%;">我們無法預測下一次的黑天鵝什麼時候飛來，<br>但我們可以決定 —— 當牠來臨時，手裡握有的是<span class="num" style="color: var(--ms-color-accent-light);">隨時可以動用的現金</span>。</p>
+    <p class="animate-line" style="--i:2" style="color: rgba(255,255,255,0.35); font-size: var(--ms-fs-meta); margin-top: 2em;">富邦人壽 ｜ TC813 鐘明通訊處</p>
+  </div>
+
+</div>
+
+<div class="controls">
+  <button onclick="prev()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>
+  </button>
+  <span id="counter">1 / 1</span>
+  <button onclick="next()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg>
+  </button>
+  <button onclick="toggleMode()" title="切換模式">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 16V4m0 0L3 8m4-4l4 4M17 8v12m0 0l4-4m-4 4l-4-4"></path></svg>
+  </button>
+  <button onclick="window.print()" title="列印/PDF">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+  </button>
+  <button onclick="toggleGrid()" title="光桌一覽 (G)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect><rect x="14" y="14" width="7" height="7" rx="1"></rect></svg>
+  </button>
+</div>
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+document.addEventListener('click', e => {
+  const img = e.target.closest('.slide img');
+  if (!img || img.closest('.brand-watermark') || img.closest('.lightbox')) return;
+  lightboxImg.src = img.src;
+  lightbox.classList.add('active');
+  e.stopPropagation();
+});
+lightbox.addEventListener('click', e => { if (e.target !== lightboxImg) closeLightbox(); });
+function closeLightbox() { lightbox.classList.remove('active'); }
+
+let mode = 'slide';
+let current = 0;
+const slides = document.querySelectorAll('.slide');
+const counter = document.getElementById('counter');
+slides.forEach(s => { s.setAttribute('data-orig-style', s.getAttribute('style') || ''); });
+
+function resetAnimations(slide) {
+  slide.querySelectorAll('.animate-line').forEach(el => {
+    el.style.animation = 'none';
+    el.offsetHeight;
+    el.style.animation = '';
+  });
+}
+
+function render() {
+  if (mode === 'slide') {
+    slides.forEach((s, i) => {
+      s.style.position = 'absolute'; s.style.inset = '0';
+      s.style.display = i === current ? 'flex' : 'none';
+      if (i === current) resetAnimations(s);
+    });
+  } else {
+    slides.forEach(s => { s.style.position = 'relative'; s.style.display = 'flex'; });
+  }
+  counter.textContent = (current + 1) + ' / ' + slides.length;
+}
+
+function next() { if (current < slides.length - 1) { current++; render(); } }
+function prev() { if (current > 0) { current--; render(); } }
+function toggleMode() {
+  mode = mode === 'slide' ? 'scroll' : 'slide';
+  document.body.classList.toggle('scroll-mode');
+  document.documentElement.classList.toggle('scroll-mode');
+  render();
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); next(); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
+  if (e.key === 'f' || e.key === 'F') { document.documentElement.requestFullscreen?.(); }
+  if (e.key === 'g' || e.key === 'G') { toggleGrid(); }
+  if (e.key === 'Escape') {
+    if (document.body.classList.contains('grid-mode')) { toggleGrid(); }
+    else if (lightbox.classList.contains('active')) { closeLightbox(); }
+    else if (document.fullscreenElement) { document.exitFullscreen(); }
+  }
+});
+
+window.addEventListener('beforeprint', () => {
+  slides.forEach(s => { s.style.position = ''; s.style.inset = ''; s.style.display = ''; });
+});
+window.addEventListener('afterprint', () => { render(); });
+
+function toggleGrid() {
+  const isGrid = document.body.classList.toggle('grid-mode');
+  document.documentElement.classList.toggle('grid-mode');
+  if (isGrid) {
+    slides.forEach((s, i) => {
+      s.style.cssText = s.getAttribute('data-orig-style') || '';
+      s.setAttribute('data-slide-num', i + 1);
+      s.classList.toggle('grid-current', i === current);
+      s._gridClick = () => { current = i; toggleGrid(); render(); };
+      s.addEventListener('click', s._gridClick);
+    });
+    requestAnimationFrame(() => {
+      const cur = document.querySelector('.grid-current');
+      if (cur) cur.scrollIntoView({ block: 'center', behavior: 'instant' });
+    });
+  } else {
+    slides.forEach(s => {
+      if (s._gridClick) { s.removeEventListener('click', s._gridClick); delete s._gridClick; }
+      s.classList.remove('grid-current');
+    });
+    render();
+  }
+}
+
+if (window.innerWidth <= 768) {
+  mode = 'scroll';
+  document.body.classList.add('scroll-mode');
+  document.documentElement.classList.add('scroll-mode');
+}
+
+let touchStartX = 0, touchStartY = 0;
+document.addEventListener('touchstart', e => {
+  touchStartX = e.touches[0].clientX;
+  touchStartY = e.touches[0].clientY;
+}, { passive: true });
+document.addEventListener('touchend', e => {
+  if (mode !== 'slide') return;
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  const dy = e.changedTouches[0].clientY - touchStartY;
+  if (Math.abs(dx) < 50 || Math.abs(dy) > Math.abs(dx)) return;
+  if (dx < 0) next(); else prev();
+});
+
+render();
+</script>
+</body>
+</html>
